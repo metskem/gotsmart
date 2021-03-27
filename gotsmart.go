@@ -17,7 +17,10 @@ import (
 	"github.com/tarm/serial"
 )
 
-const VERSION = "0.0.2"
+var (
+	VersionTag string
+	BuildTime  string
+)
 
 type frameupdate struct {
 	Frame string
@@ -83,7 +86,7 @@ func main() {
 	)
 	flag.Parse()
 
-	fmt.Printf("GotSmart (%s)\n", VERSION)
+	fmt.Printf("GotSmart (version %s, build time %s)\n", VersionTag, BuildTime)
 
 	var parity serial.Parity
 	switch *parityFlag {
