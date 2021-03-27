@@ -57,17 +57,17 @@ func (do DataObject) String() string {
 }
 
 // ParseFrame returns a frame from the text respresentation.
-func ParseFrame(frame string) (f Frame, err error) {
-	f.Objects = make(map[string]DataObject)
+func ParseFrame(frameString string) (frame Frame, err error) {
+	frame.Objects = make(map[string]DataObject)
 
-	for _, s := range strings.Split(frame, "\n") {
+	for _, s := range strings.Split(frameString, "\n") {
 		s = strings.TrimSpace(s)
 
 		// skip lines without objects
 		if s == "" || s[0] == '!' {
 			continue
 		} else if s[0] == '/' {
-			f.Header = s
+			frame.Header = s
 			continue
 		}
 
@@ -79,7 +79,7 @@ func ParseFrame(frame string) (f Frame, err error) {
 		switch obj.ID {
 		// Version of P1 output
 		case "1-3:0.2.8":
-			f.Version = obj.Value
+			frame.Version = obj.Value
 		// Date-Time of P1 output
 		case "0-0:1.0.0":
 			if len(obj.Value) > 2 {
@@ -94,15 +94,15 @@ func ParseFrame(frame string) (f Frame, err error) {
 				if err != nil {
 					continue
 				}
-				f.Timestamp = t
+				frame.Timestamp = t
 			}
 		case "0-0:96.1.1":
-			f.EquipmentID = obj.Value
+			frame.EquipmentID = obj.Value
 		default:
-			f.Objects[obj.ID] = obj
+			frame.Objects[obj.ID] = obj
 		}
 	}
-	return f, nil
+	return frame, nil
 }
 
 // ParseObject returns a object for a given line in a frame.
