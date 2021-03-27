@@ -120,5 +120,8 @@ func main() {
 
 	http.Handle("/metrics", promhttp.Handler())
 	http.Handle("/", f)
-	http.ListenAndServe(*addrFlag, nil)
+	err = http.ListenAndServe(*addrFlag, nil)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
