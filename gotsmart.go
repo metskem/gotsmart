@@ -2,8 +2,8 @@ package main
 
 import (
 	"bufio"
-	"flag"
 	"fmt"
+	"github.com/metskem/gotsmart/conf"
 	"log"
 	"net/http"
 	"strings"
@@ -15,11 +15,6 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/tarm/serial"
-)
-
-var (
-	VersionTag string
-	BuildTime  string
 )
 
 type frameupdate struct {
@@ -77,40 +72,9 @@ func (f *frameupdate) Process(br *bufio.Reader, collector *dsmrprometheus.DSMRCo
 }
 
 func main() {
-	var (
-		addrFlag   = flag.String("listen-address", ":8080", "The address to listen on for HTTP requests.")
-		deviceFlag = flag.String("device", "/dev/ttyAMA0", "Serial device to read P1 data from.")
-		baudFlag   = flag.Int("baud", 115200, "Baud rate (speed) to use.")
-		bitsFlag   = flag.Int("bits", 8, "Number of databits.")
-		parityFlag = flag.String("parity", "none", "Parity the use (none/odd/even/mark/space).")
-	)
-	flag.Parse()
-
-	fmt.Printf("GotSmart (version %s, build time %s)\n", VersionTag, BuildTime)
-
-	var parity serial.Parity
-	switch *parityFlag {
-	case "none":
-		parity = serial.ParityNone
-	case "odd":
-		parity = serial.ParityOdd
-	case "even":
-		parity = serial.ParityEven
-	case "mark":
-		parity = serial.ParityMark
-	case "space":
-		parity = serial.ParitySpace
-	default:
-		log.Fatal("Invalid parity setting")
-	}
-
-	c := &serial.Config{
-		Name:   *deviceFlag,
-		Baud:   *baudFlag,
-		Size:   byte(*bitsFlag),
-		Parity: parity,
-	}
-	p, err := serial.OpenPort(c)
+	conf.Init()
+	serialConfig := &serial.Config{Name: *conf.DeviceFlag, Baud: *conf.BaudFlag, Size: byte(*conf.BitsFlag), Parity: conf.Parity}
+	p, err := serial.OpenPort(serialConfig)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -123,7 +87,7 @@ func main() {
 
 	http.Handle("/metrics", promhttp.Handler())
 	http.Handle("/", f)
-	err = http.ListenAndServe(*addrFlag, nil)
+	err = http.ListenAndServe(*conf.AddrFlag, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
