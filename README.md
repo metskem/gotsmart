@@ -10,7 +10,7 @@ Setup
 ### Build
 
 ```sh
-go get github.com/basvdlei/gotsmart
+go get github.com/metskem/gotsmart
 ```
 
 ### Run
