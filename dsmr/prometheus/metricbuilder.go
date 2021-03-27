@@ -62,6 +62,16 @@ var metricBuilders = map[string]MetricBuilder{
 			),
 		},
 	*/
+	"0-1:24.2.1": MetricBuilder{
+		ValueType: prometheus.CounterValue,
+		Desc: prometheus.NewDesc(
+			namespace+"_gas_delivered_to_client_last_5min_m3",
+			"meter reading gas delivered to client (last 5 min value) in m3",
+			defaultLabels,
+			prometheus.Labels{},
+		),
+		Unit: "m3",
+	},
 	// Meter Reading electricity delivered to client (Tariff 1) in 0,001
 	// kWh 1-0:1.8.1.255 2 Value 3 Register F9(3,3), tag 6 kWh
 	"1-0:1.8.1": MetricBuilder{

@@ -56,7 +56,7 @@ func (do DataObject) String() string {
 	return fmt.Sprintf("%s(%s*%s)", do.ID, do.Value, do.Unit)
 }
 
-// ParseFrame returns a frame from the text respresentation.
+// ParseFrame returns a frame from the text representation.
 func ParseFrame(frameString string) (frame Frame, err error) {
 	frame.Objects = make(map[string]DataObject)
 
@@ -108,6 +108,12 @@ func ParseFrame(frameString string) (frame Frame, err error) {
 // ParseObject returns a object for a given line in a frame.
 func ParseObject(line string) (DataObject, error) {
 	m := objectRegexp.FindStringSubmatch(strings.TrimSpace(line))
+	// I could not come up with a regex that handles both existing and the gas metric ( 0-1:24.2.1(210326193000W)(05019.213*m3) )
+	// That is why we have this ugly hack here to extract the second value (m3)
+	if len(m) > 2 && strings.Contains(m[2], ")(") {
+		m[2] = strings.Split(m[2], ")(")[1]
+	}
+
 	if m == nil || len(m) < 3 {
 		return DataObject{}, fmt.Errorf("no object found in string")
 	}
