@@ -45,7 +45,7 @@ func (dc *DSMRCollector) Update(f dsmr.Frame) {
 			}
 			value, err := strconv.ParseFloat(obj.Value, 64)
 			if err != nil {
-				log.Printf("could not parse value to float64 for %s\n", obj)
+				log.Printf("could not parse value to float64 for %s: %s\n", obj, err)
 				continue
 			}
 			m, err := prometheus.NewConstMetric(
@@ -55,7 +55,7 @@ func (dc *DSMRCollector) Update(f dsmr.Frame) {
 				f.EquipmentID, f.Version, //labels
 			)
 			if err != nil {
-				log.Printf("could not create prometheus metric for %s\n", obj)
+				log.Printf("could not create prometheus metric for %s: %s\n", obj, err)
 				continue
 			}
 			metrics = append(metrics, m)
