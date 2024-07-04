@@ -62,7 +62,7 @@ var metricBuilders = map[string]MetricBuilder{
 			),
 		},
 	*/
-	"0-1:24.2.1": MetricBuilder{
+	"0-1:24.2.1": {
 		ValueType: prometheus.CounterValue,
 		Desc: prometheus.NewDesc(
 			namespace+"_gas_delivered_to_client_last_5min_m3",
@@ -300,8 +300,8 @@ var metricBuilders = map[string]MetricBuilder{
 	"1-0:32.7.0": {
 		ValueType: prometheus.GaugeValue,
 		Desc: prometheus.NewDesc(
-			namespace+"_current_l1_v",
-			"instantaneous current l1 in v resolution",
+			namespace+"_voltage_l1_v",
+			"instantaneous voltage l1 in v resolution",
 			defaultLabels,
 			prometheus.Labels{},
 		),
@@ -311,8 +311,8 @@ var metricBuilders = map[string]MetricBuilder{
 	"1-0:52.7.0": {
 		ValueType: prometheus.GaugeValue,
 		Desc: prometheus.NewDesc(
-			namespace+"_current_l2_v",
-			"instantaneous current l2 in v resolution",
+			namespace+"_voltage_l2_v",
+			"instantaneous voltage l2 in v resolution",
 			defaultLabels,
 			prometheus.Labels{},
 		),
@@ -322,8 +322,8 @@ var metricBuilders = map[string]MetricBuilder{
 	"1-0:72.7.0": {
 		ValueType: prometheus.GaugeValue,
 		Desc: prometheus.NewDesc(
-			namespace+"_current_l3_v",
-			"instantaneous current l3 in v resolution",
+			namespace+"_voltage_l3_v",
+			"instantaneous voltage l3 in v resolution",
 			defaultLabels,
 			prometheus.Labels{},
 		),
