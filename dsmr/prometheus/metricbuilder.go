@@ -74,7 +74,7 @@ var metricBuilders = map[string]MetricBuilder{
 	},
 	// Meter Reading electricity delivered to client (Tariff 1) in 0,001
 	// kWh 1-0:1.8.1.255 2 Value 3 Register F9(3,3), tag 6 kWh
-	"1-0:1.8.1": MetricBuilder{
+	"1-0:1.8.1": {
 		ValueType: prometheus.CounterValue,
 		Desc: prometheus.NewDesc(
 			namespace+"_electricity_delivered_to_client_tariff_1_kwh",
@@ -86,7 +86,7 @@ var metricBuilders = map[string]MetricBuilder{
 	},
 	// Meter Reading electricity delivered to client (Tariff 2) in 0,001
 	// kWh 1-0:1.8.2.255 2 Value 3 Register F9(3,3), tag 6 kWh
-	"1-0:1.8.2": MetricBuilder{
+	"1-0:1.8.2": {
 		ValueType: prometheus.CounterValue,
 		Desc: prometheus.NewDesc(
 			namespace+"_electricity_delivered_to_client_tariff_2_kwh",
@@ -98,7 +98,7 @@ var metricBuilders = map[string]MetricBuilder{
 	},
 	// Meter Reading electricity delivered by client (Tariff 1) in 0,001
 	// kWh 1-0:2.8.1.255 2 Value 3 Register F9(3,3), tag 6 kWh
-	"1-0:2.8.1": MetricBuilder{
+	"1-0:2.8.1": {
 		ValueType: prometheus.CounterValue,
 		Desc: prometheus.NewDesc(
 			namespace+"_electricity_delivered_by_client_tariff_1_kwh",
@@ -110,7 +110,7 @@ var metricBuilders = map[string]MetricBuilder{
 	},
 	// Meter Reading electricity delivered by client (Tariff 2) in 0,001
 	// kWh 1-0:2.8.2.255 2 Value 3 Register F9(3,3), tag 6 kWh
-	"1-0:2.8.2": MetricBuilder{
+	"1-0:2.8.2": {
 		ValueType: prometheus.CounterValue,
 		Desc: prometheus.NewDesc(
 			namespace+"_electricity_delivered_by_client_tariff_2_kwh",
@@ -124,7 +124,7 @@ var metricBuilders = map[string]MetricBuilder{
 	// to switch tariff dependent loads e.g boilers. This is the
 	// responsibility of the P1 user 0-0:96.14.0.255 2 Value 1 Data S4, tag
 	// 9
-	"0-0:96.14.0": MetricBuilder{
+	"0-0:96.14.0": {
 		ValueType: prometheus.UntypedValue,
 		Desc: prometheus.NewDesc(
 			namespace+"_tariff_indicator_electricity",
@@ -135,7 +135,7 @@ var metricBuilders = map[string]MetricBuilder{
 	},
 	// Actual electricity power delivered (+P) in 1 Watt resolution
 	// 1-0:1.7.0.255 2 Value 3 Register F5(3,3), tag 18 kW
-	"1-0:1.7.0": MetricBuilder{
+	"1-0:1.7.0": {
 		ValueType: prometheus.GaugeValue,
 		Desc: prometheus.NewDesc(
 			namespace+"_electricity_power_delivered_kw",
@@ -147,7 +147,7 @@ var metricBuilders = map[string]MetricBuilder{
 	},
 	// Actual electricity power received (-P) in 1 Watt resolution
 	// 1-0:2.7.0.255 2 Value 3 Register F5(3,3), tag 18 kW
-	"1-0:2.7.0": MetricBuilder{
+	"1-0:2.7.0": {
 		ValueType: prometheus.GaugeValue,
 		Desc: prometheus.NewDesc(
 			namespace+"_electricity_power_received_kw",
@@ -159,7 +159,7 @@ var metricBuilders = map[string]MetricBuilder{
 	},
 	// The actual threshold Electricity in kW 0-0:17.0.0.255 3 Threshold
 	// active 71 Limiter Class F4(1,1), tag 18 kW
-	"0-0:17.0.0": MetricBuilder{
+	"0-0:17.0.0": {
 		ValueType: prometheus.GaugeValue,
 		Desc: prometheus.NewDesc(
 			namespace+"_threshold_electricity_kw",
@@ -171,7 +171,7 @@ var metricBuilders = map[string]MetricBuilder{
 	},
 	// Switch position Electricity (in/out/enabled).  0-0:96.3.10.255 3
 	// Control State 70 Disconnector Control I1, tag 22
-	"0-0:96.3.10": MetricBuilder{
+	"0-0:96.3.10": {
 		ValueType: prometheus.UntypedValue,
 		Desc: prometheus.NewDesc(
 			namespace+"_switch_position_electricity",
@@ -182,7 +182,7 @@ var metricBuilders = map[string]MetricBuilder{
 	},
 	// Number of power failures in any phase 0-0:96.7.21.255 2 Value 1 Data
 	// F5(0,0), tag 18
-	"0-0:96.7.21": MetricBuilder{
+	"0-0:96.7.21": {
 		ValueType: prometheus.CounterValue,
 		Desc: prometheus.NewDesc(
 			namespace+"_power_failures_total",
@@ -193,7 +193,7 @@ var metricBuilders = map[string]MetricBuilder{
 	},
 	// Number of long power failures in any phase 0-0:96.7.9.255 2 Value 1
 	// Data F5(0,0), tag 18
-	"0-0:96.7.9": MetricBuilder{
+	"0-0:96.7.9": {
 		ValueType: prometheus.CounterValue,
 		Desc: prometheus.NewDesc(
 			namespace+"_long_power_failures_total",
@@ -220,7 +220,7 @@ var metricBuilders = map[string]MetricBuilder{
 	*/
 	// Number of voltage sags in phase L1 1-0:32.32.0.255 2 Value 1 Data
 	// F5(0,0), tag 18
-	"1-0:32.32.0": MetricBuilder{
+	"1-0:32.32.0": {
 		ValueType: prometheus.CounterValue,
 		Desc: prometheus.NewDesc(
 			namespace+"_voltage_sags_in_phase_l1_total",
@@ -231,7 +231,7 @@ var metricBuilders = map[string]MetricBuilder{
 	},
 	// Number of voltage sags in phase L2 (polyphase meters only)
 	// 1-0:52.32.0.255 2 Value 1 Data F5(0,0), tag 18
-	"1-0:52.32.0": MetricBuilder{
+	"1-0:52.32.0": {
 		ValueType: prometheus.CounterValue,
 		Desc: prometheus.NewDesc(
 			namespace+"_voltage_sags_in_phase_l2_total",
@@ -242,7 +242,7 @@ var metricBuilders = map[string]MetricBuilder{
 	},
 	// Number of voltage sags in phase L3 (polyphase meters only)
 	// 1-0:72:32.0.255 2 Value 1 Data F5(0,0), tag 18
-	"1-0:72:32.0": MetricBuilder{
+	"1-0:72:32.0": {
 		ValueType: prometheus.CounterValue,
 		Desc: prometheus.NewDesc(
 			namespace+"_voltage_sags_in_phase_l3_total",
@@ -253,7 +253,7 @@ var metricBuilders = map[string]MetricBuilder{
 	},
 	// Number of voltage swells in phase L1 1-0:32.36.0.255 2 Value 1 Data
 	// F5(0,0), tag 18
-	"1-0:32.36.0": MetricBuilder{
+	"1-0:32.36.0": {
 		ValueType: prometheus.CounterValue,
 		Desc: prometheus.NewDesc(
 			namespace+"_voltage_swells_in_phase_l1_total",
@@ -264,7 +264,7 @@ var metricBuilders = map[string]MetricBuilder{
 	},
 	// Number of voltage swells in phase L2 (polyphase meters only)
 	// 1-0:52.36.0.255 2 Value 1 Data F5(0,0), tag 18
-	"1-0:52.36.0": MetricBuilder{
+	"1-0:52.36.0": {
 		ValueType: prometheus.CounterValue,
 		Desc: prometheus.NewDesc(
 			namespace+"_voltage_swells_in_phase_l2_total",
@@ -275,7 +275,7 @@ var metricBuilders = map[string]MetricBuilder{
 	},
 	// Number of voltage swells in phase L3 (polyphase meters only)
 	// 1-0:72.36.0.255 2 Value 1 Data F5(0,0), tag 18
-	"1-0:72.36.0": MetricBuilder{
+	"1-0:72.36.0": {
 		ValueType: prometheus.CounterValue,
 		Desc: prometheus.NewDesc(
 			namespace+"_voltage_swells_in_phase_l3_total",
@@ -296,9 +296,42 @@ var metricBuilders = map[string]MetricBuilder{
 	// tag 17
 	// TODO Not implemented
 
+	// Instantaneous voltage L1 in V resolution.  1-0:32.7.0.255
+	"1-0:32.7.0": {
+		ValueType: prometheus.GaugeValue,
+		Desc: prometheus.NewDesc(
+			namespace+"_current_l1_v",
+			"instantaneous current l1 in v resolution",
+			defaultLabels,
+			prometheus.Labels{},
+		),
+		Unit: "V",
+	},
+	// Instantaneous voltage L2 in V resolution.  1-0:52.7.0.255
+	"1-0:52.7.0": {
+		ValueType: prometheus.GaugeValue,
+		Desc: prometheus.NewDesc(
+			namespace+"_current_l2_v",
+			"instantaneous current l2 in v resolution",
+			defaultLabels,
+			prometheus.Labels{},
+		),
+		Unit: "V",
+	},
+	// Instantaneous voltage L3 in V resolution.  1-0:72.7.0.255
+	"1-0:72.7.0": {
+		ValueType: prometheus.GaugeValue,
+		Desc: prometheus.NewDesc(
+			namespace+"_current_l3_v",
+			"instantaneous current l3 in v resolution",
+			defaultLabels,
+			prometheus.Labels{},
+		),
+		Unit: "V",
+	},
 	// Instantaneous current L1 in A resolution.  1-0:31.7.0.255  2 Value 3
 	// Register F3(0,0), tag 18  A
-	"1-0:31.7.0": MetricBuilder{
+	"1-0:31.7.0": {
 		ValueType: prometheus.GaugeValue,
 		Desc: prometheus.NewDesc(
 			namespace+"_current_l1_a",
@@ -310,7 +343,7 @@ var metricBuilders = map[string]MetricBuilder{
 	},
 	// Instantaneous current L2 in A resolution.  1-0:51.7.0.255  2 Value 3
 	// Register F3(0,0), tag 18  A
-	"1-0:51.7.0": MetricBuilder{
+	"1-0:51.7.0": {
 		ValueType: prometheus.GaugeValue,
 		Desc: prometheus.NewDesc(
 			namespace+"_current_l2_a",
@@ -322,7 +355,7 @@ var metricBuilders = map[string]MetricBuilder{
 	},
 	// Instantaneous current L3 in A resolution.  1-0:71.7.0.255  2 Value 3
 	// Register F3(0,0), tag 18  A
-	"1-0:71.7.0": MetricBuilder{
+	"1-0:71.7.0": {
 		ValueType: prometheus.GaugeValue,
 		Desc: prometheus.NewDesc(
 			namespace+"_current_l3_a",
@@ -334,7 +367,7 @@ var metricBuilders = map[string]MetricBuilder{
 	},
 	// Instantaneous active power L1 (+P) in W resolution 1-0:21.7.0.255  2
 	// Value 3 Register F5(3,3), tag 18  kW
-	"1-0:21.7.0": MetricBuilder{
+	"1-0:21.7.0": {
 		ValueType: prometheus.GaugeValue,
 		Desc: prometheus.NewDesc(
 			namespace+"_active_power_delivered_l1_kw",
@@ -346,7 +379,7 @@ var metricBuilders = map[string]MetricBuilder{
 	},
 	// Instantaneous active power L2 (+P) in W resolution 1-0:41.7.0.255  2
 	// Value 3 Register F5(3,3), tag 18  kW
-	"1-0:41.7.0": MetricBuilder{
+	"1-0:41.7.0": {
 		ValueType: prometheus.GaugeValue,
 		Desc: prometheus.NewDesc(
 			namespace+"_active_power_delivered_l2_kw",
@@ -358,7 +391,7 @@ var metricBuilders = map[string]MetricBuilder{
 	},
 	// Instantaneous active power L3 (+P) in W resolution 1-0:61.7.0.255  2
 	// Value 3 Register F5(3,3), tag 18  kW
-	"1-0:61.7.0": MetricBuilder{
+	"1-0:61.7.0": {
 		ValueType: prometheus.GaugeValue,
 		Desc: prometheus.NewDesc(
 			namespace+"_active_power_delivered_l3_kw",
@@ -370,7 +403,7 @@ var metricBuilders = map[string]MetricBuilder{
 	},
 	// Instantaneous active power L1 (-P) in W resolution 1-0:22.7.0.255  2
 	// Value 3 Register F5(3,3), tag 18  kW
-	"1-0:22.7.0": MetricBuilder{
+	"1-0:22.7.0": {
 		ValueType: prometheus.GaugeValue,
 		Desc: prometheus.NewDesc(
 			namespace+"_active_power_received_l1_kw",
@@ -382,7 +415,7 @@ var metricBuilders = map[string]MetricBuilder{
 	},
 	// Instantaneous active power L2 (-P) in W resolution 1-0:42.7.0.255  2
 	// Value 3 Register F5(3,3), tag 18  kW
-	"1-0:42.7.0": MetricBuilder{
+	"1-0:42.7.0": {
 		ValueType: prometheus.GaugeValue,
 		Desc: prometheus.NewDesc(
 			namespace+"_active_power_received_l2_kw",
@@ -394,7 +427,7 @@ var metricBuilders = map[string]MetricBuilder{
 	},
 	// Instantaneous active power L3 (-P) in W resolution 1-0:62.7.0.255  2
 	// Value 3 Register F5(3,3), tag 18  kW
-	"1-0:62.7.0": MetricBuilder{
+	"1-0:62.7.0": {
 		ValueType: prometheus.GaugeValue,
 		Desc: prometheus.NewDesc(
 			namespace+"_active_power_received_l3_kw",
